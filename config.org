@@ -41,6 +41,11 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+begin_src emacs-lisp :tangle yes
 (setq org-agenda-files '("~/bsab"))
 #+end_src
+**** org todo states
+#+begin_src emacs-lisp :tangle yes
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "STRT(s)" "IN-PROGRESS(i)" "NEXT(n)" "WAIT(w@/!)" "|" "DONE(d!)" "CANC(c@)")))
+#+end_src
 *** org agenda
 **** remove =Scheduled: = text in front of org agenda items
 It just takes up valuable space and doesn't have a use
