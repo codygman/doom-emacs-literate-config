@@ -33,15 +33,14 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+end_src
 ** Org Mode
 *** basics
-**** Set my org mode directory
+**** Here is where my org files live
 #+begin_src emacs-lisp :tangle yes
 (setq org-directory "~/bsab")
 #+end_src
-**** Set my org-agenda-files
 #+begin_src emacs-lisp :tangle yes
 (setq org-agenda-files '("~/bsab"))
 #+end_src
-**** org todo states
+**** These are my todo states
 #+begin_src emacs-lisp :tangle yes
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STRT(s)" "IN-PROGRESS(i)" "NEXT(n)" "WAIT(w@/!)" "|" "DONE(d!)" "CANC(c@)")))
