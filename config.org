@@ -37,3 +37,10 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+begin_src emacs-lisp :tangle yes
 (setq org-agenda-files '("~/bsab"))
 #+end_src
+*** org agenda
+**** remove =Scheduled: = text in front of org agenda items
+It just takes up valuable space and doesn't have a use
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-agenda-scheduled-leaders '("" ""))
+#+end_src
