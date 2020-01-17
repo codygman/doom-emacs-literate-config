@@ -22,3 +22,12 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+BEGIN_SRC emacs-lisp
 (setq-default evil-escape-key-sequence "jf")
 #+END_SRC
+** Org Mode
+*** Set my org mode directory
+#+begin_src emacs-lisp :tangle yes
+(setq org-directory "~/bsab")
+#+end_src
+*** Set my org-agenda-files
+#+begin_src emacs-lisp :tangle yes
+(setq org-agenda-files '("~/bsab"))
+#+end_src
