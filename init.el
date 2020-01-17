@@ -11,7 +11,7 @@
         +devdocs
         +docsets)
        snippets
-       spellcheck
+       ;; spellcheck
        (syntax-checker +childframe)
        workspaces
 
