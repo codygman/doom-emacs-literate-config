@@ -22,6 +22,10 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+BEGIN_SRC emacs-lisp
 (setq-default evil-escape-key-sequence "jf")
 #+END_SRC
+**** disable line numbers
+#+begin_src emacs-lisp :tangle yes
+(setq display-line-numbers-type nil)
+#+end_src
 ** Doom Visual
 *** font
 #+begin_src emacs-lisp :tangle yes
