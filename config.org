@@ -42,8 +42,9 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+end_src
 **** These are my todo states
 #+begin_src emacs-lisp :tangle yes
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "STRT(s)" "IN-PROGRESS(i)" "NEXT(n)" "WAIT(w@/!)" "|" "DONE(d!)" "CANC(c@)")))
+(after! org
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "STRT(s)" "IN-PROGRESS(i)" "NEXT(n)" "WAIT(w@/!)" "|" "DONE(d!)" "KILL(k@)"))))
 #+end_src
 *** org agenda
 **** remove =Scheduled: = text in front of org agenda items
