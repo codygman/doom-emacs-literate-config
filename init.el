@@ -17,7 +17,7 @@
 
        :completion
        (company +auto +childframe)
-       (ivy +fuzzy +childframe)
+       (ivy +fuzzy)
 
        :editor
        format
