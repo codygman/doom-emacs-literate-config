@@ -32,26 +32,6 @@ simple capture template:
 I find it's a good idea to prepend these tasks by default so your freshest ideas
 are near the top of the file. Perhaps that's a bad habit or reinforces not
 curating or refiling things enough though.
-*** Projects
-Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas/Notes]] I quickly captured
-
-#+begin_src emacs-lisp :noweb-ref project-capture-template :tangle no :noweb yes
-("p" "Project" entry (file+headline "~/bsab/projects.org" "Projects")
- (file "capture-templates/project-capture-template.org") :prepend t)
-#+end_src
-
-#+name: test
-#+begin_src org :tangle ~/bsab/capture-templates/project-capture-template.org :mkdirp yes :noweb yes
-,* TODO %? [/]
-  <<default-capture-properties>>
-,** TODO <1m project notes                  :plan:
-         :PROPERTIES:
-         :Effort:       00:01
-         :END:
-,** TODO plan project :plan:
-,** TODO project good/bad recap
-#+end_src
-
 ** Agenda: What should you be doing now?
 The org agenda is quite a nice way to surface your notes into an actionable list
 of priorities and scheduled items. Though we need to do some work to [[id:a09cbdef-c018-45ff-af40-bdd78c0d7edd][Make Org
