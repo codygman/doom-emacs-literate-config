@@ -32,6 +32,16 @@ simple capture template:
 I find it's a good idea to prepend these tasks by default so your freshest ideas
 are near the top of the file. Perhaps that's a bad habit or reinforces not
 curating or refiling things enough though.
+*** Oh Crap I Need To Drop Everything And Do X
+
+Example: Stop configuring org for hours on end and clock in to "Go get dinner" :)
+
+#+begin_src emacs-lisp :noweb-ref simple-todo-clocking-capture-template :tangle no :noweb yes
+("T" "Todo" entry (file+headline "~/bsab/misc.org" "Misc")
+             "* TODO %?
+<<default-capture-properties>>
+" :prepend t :clock-in t :clock-resume t)
+#+end_src
 *** Projects
 Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas/Notes]] I quickly captured
 
@@ -51,7 +61,6 @@ Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas
 ,** TODO plan project :plan:
 ,** TODO project good/bad recap
 #+end_src
-
 ** Agenda: What should you be doing now?
 The org agenda is quite a nice way to surface your notes into an actionable list
 of priorities and scheduled items. Though we need to do some work to [[id:a09cbdef-c018-45ff-af40-bdd78c0d7edd][Make Org
@@ -105,6 +114,7 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
       '(
         <<simple-todo-capture-template>>
 <<project-capture-template>>
+<<simple-todo-clocking-capture-template>>
         ))
 #+end_src
 *** default org capture heading properties
