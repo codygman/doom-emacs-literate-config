@@ -67,27 +67,27 @@ Agenda look nicer]], it's well worth the effort.
 :header-args: :noweb-ref personal-info
 :END:
 *** Set full name
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (setq user-full-name "Cody Goodman")
 #+END_SRC
 *** Set email address
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (setq user-mail-address "cody@codygman.dev")
 #+END_SRC
 ** Doom Core
 Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 *** [[doom:core/core.el][Core]]
 **** Use =jf= instead of default doom =jk=
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (setq-default evil-escape-key-sequence "jf")
 #+END_SRC
 **** disable line numbers
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle yes
 (setq display-line-numbers-type nil)
 #+end_src
 ** Doom Visual
 *** font
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle yes
 (setq doom-font (font-spec :family "Source Code Pro" :size 17))
 #+end_src
 ** Org Mode
