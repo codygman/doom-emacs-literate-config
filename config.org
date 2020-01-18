@@ -95,6 +95,10 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+begin_src emacs-lisp :tangle yes
 (after! org
 #+end_src
+*** Enable linking with org uuid
+#+begin_src emacs-lisp :tangle yes
+(require 'org-id)
+#+end_src
 *** org capture templates
 #+begin_src emacs-lisp :tangle yes :noweb yes
 (setq org-capture-templates
