@@ -3,10 +3,71 @@
 #+EMAIL: cody@codygman.dev
 #+LANGUAGE: en
 #+STARTUP: inlineimages
-#+PROPERTY: header-args :tangle yes :cache yes :results silent :padline no
+#+PROPERTY: header-args :cache yes :results silent :padline no
 
+* A Note On The Structure Of This Document
+This document attempts to motivate changes first by describing a workflow in
+prose and presenting examples inline or linking to headings such as [[id:a09cbdef-c018-45ff-af40-bdd78c0d7edd][Make Org
+Agenda look nicer]] when appropriate.
+
+Perhaps it's always appropriate  to have a workflow description and then link to
+the relevant hierarchical [[id:bc892078-e21e-4f4e-885c-44c0ade78420][Configuration]] tree section, but for now I'm going
+with the mixed approach since [[https://github.com/alhassy/emacs.d/blob/master/README.org#a-life-configuring-emacs][that style can be very nice]].
+* Managing Life With Org Mode
+** Capturing
+*** Ideas/Notes
+:PROPERTIES:
+:ID:       783fc72a-92d9-4ee1-9d58-9e77486cc544
+:END:
+Any idea or note that comes to me throughout the day can be captured with a
+simple capture template:
+
+#+begin_src emacs-lisp :noweb-ref simple-todo-capture-template :tangle no
+("t" "Todo (no clock in)" entry (file+headline "~/bsab/misc.org" "Misc")
+             "* TODO %?
+:PROPERTIES:
+:CREATED: %U
+:END:
+" :prepend t)
+#+end_src
+
+I find it's a good idea to prepend these tasks by default so your freshest ideas
+are near the top of the file. Perhaps that's a bad habit or reinforces not
+curating or refiling things enough though.
+*** Projects
+Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas/Notes]] I quickly captured
+
+#+begin_src emacs-lisp :noweb-ref project-capture-template :tangle no :noweb yes
+("p" "Project" entry (file+headline "~/bsab/projects.org" "Projects")
+ (file "capture-templates/project-capture-template.org") :prepend t)
+#+end_src
+
+#+name: test
+#+begin_src org :tangle ~/bsab/capture-templates/project-capture-template.org :mkdirp yes :noweb yes
+,* TODO %? [/]
+  <<default-capture-properties>>
+,** TODO <1m project notes                  :plan:
+         :PROPERTIES:
+         :Effort:       00:01
+         :END:
+,** TODO plan project :plan:
+,** TODO project good/bad recap
+#+end_src
+
+** Agenda: What should you be doing now?
+The org agenda is quite a nice way to surface your notes into an actionable list
+of priorities and scheduled items. Though we need to do some work to [[id:a09cbdef-c018-45ff-af40-bdd78c0d7edd][Make Org
+Agenda look nicer]], it's well worth the effort.
+** Resources
+*** https://github.com/alhassy/emacs.d/blob/master/README.org
 * Configuration
+:PROPERTIES:
+:ID:       bc892078-e21e-4f4e-885c-44c0ade78420
+:END:
 ** Personal Information
+:PROPERTIES:
+:header-args: :noweb-ref personal-info
+:END:
 *** Set full name
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Cody Goodman")
@@ -15,7 +76,7 @@
 #+BEGIN_SRC emacs-lisp
 (setq user-mail-address "cody@codygman.dev")
 #+END_SRC
-** Doom core
+** Doom Core
 Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 *** [[doom:core/core.el][Core]]
 **** Use =jf= instead of default doom =jk=
@@ -23,33 +84,58 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 (setq-default evil-escape-key-sequence "jf")
 #+END_SRC
 **** disable line numbers
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (setq display-line-numbers-type nil)
 #+end_src
 ** Doom Visual
 *** font
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (setq doom-font (font-spec :family "Source Code Pro" :size 17))
 #+end_src
 ** Org Mode
+*** start after org macro
+#+begin_src emacs-lisp :tangle yes
+(after! org
+#+end_src
+*** org capture templates
+#+begin_src emacs-lisp :tangle yes :noweb yes
+(setq org-capture-templates
+      '(
+        <<simple-todo-capture-template>>
+<<project-capture-template>>
+        ))
+#+end_src
+*** default org capture heading properties
+#+name: default-capture-properties
+#+begin_src org
+:PROPERTIES:
+:ID:       %(org-id-uuid)
+:CREATED: %U
+:END:
+#+end_src
 *** basics
 **** Here is where my org files live
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (setq org-directory "~/bsab")
-#+end_src
-#+begin_src emacs-lisp :tangle yes
 (setq org-agenda-files '("~/bsab"))
 #+end_src
 **** These are my todo states
-#+begin_src emacs-lisp :tangle yes
-(after! org
+#+name: set-org-todo-keywords
+#+begin_src emacs-lisp
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "STRT(s)" "IN-PROGRESS(i)" "NEXT(n)" "WAIT(w@/!)" "|" "DONE(d!)" "KILL(k@)"))))
+        '((sequence "TODO(t)" "STRT(s)" "IN-PROGRESS(i)" "NEXT(n)" "WAIT(w@/!)" "|" "DONE(d!)" "KILL(k@)")))
 #+end_src
 *** org agenda
-**** remove =Scheduled: = text in front of org agenda items
+**** Make Org Agenda look nicer
+:PROPERTIES:
+:ID:       a09cbdef-c018-45ff-af40-bdd78c0d7edd
+:END:
+***** remove =Scheduled: = text in front of org agenda items
 It just takes up valuable space and doesn't have a use
-
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (setq org-agenda-scheduled-leaders '("" ""))
+#+end_src
+*** end after org macro
+#+begin_src emacs-lisp
+)
 #+end_src
