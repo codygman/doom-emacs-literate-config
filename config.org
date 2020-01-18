@@ -105,7 +105,7 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+end_src
 *** default org capture heading properties
 #+name: default-capture-properties
-#+begin_src org
+#+begin_src text
 :PROPERTIES:
 :ID:       %(org-id-uuid)
 :CREATED: %U
