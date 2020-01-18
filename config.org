@@ -22,12 +22,10 @@ with the mixed approach since [[https://github.com/alhassy/emacs.d/blob/master/R
 Any idea or note that comes to me throughout the day can be captured with a
 simple capture template:
 
-#+begin_src emacs-lisp :noweb-ref simple-todo-capture-template :tangle no
+#+begin_src emacs-lisp :noweb-ref simple-todo-capture-template :tangle no :noweb yes
 ("t" "Todo (no clock in)" entry (file+headline "~/bsab/misc.org" "Misc")
              "* TODO %?
-:PROPERTIES:
-:CREATED: %U
-:END:
+<<default-capture-properties>>
 " :prepend t)
 #+end_src
 
