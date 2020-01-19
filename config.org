@@ -61,10 +61,25 @@ Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas
 ,** TODO plan project :plan:
 ,** TODO project good/bad recap
 #+end_src
+*** Additions To Default Capture
+**** TODO Screenshots: Quickly record information
+:PROPERTIES:
+:ID:       b02315a9-91db-4a3a-a7d2-c9dadfec5f87
+:END:
+not working in doom and really missing them
+
+see [[id:41a15340-e9ab-4722-88ea-5774020a5418][org-download]]
+
+NOTE: Default doom attach directory is ~/org/attach which isn't synced with phone
+***** TODO view screenshots across devices (PC/Android Orgzly)
+**** TODO clock in/out smartly on state change
 ** Agenda: What should you be doing now?
 The org agenda is quite a nice way to surface your notes into an actionable list
 of priorities and scheduled items. Though we need to do some work to [[id:a09cbdef-c018-45ff-af40-bdd78c0d7edd][Make Org
 Agenda look nicer]], it's well worth the effort.
+** Viewing Org Files (prefer using agenda if possible)
+*** Additions To Default Org Mode View
+**** TODO hide properties by default
 ** Resources
 *** https://github.com/alhassy/emacs.d/blob/master/README.org
 * Configuration
