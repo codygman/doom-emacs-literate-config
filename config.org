@@ -73,6 +73,13 @@ see [[id:41a15340-e9ab-4722-88ea-5774020a5418][org-download]]
 NOTE: Default doom attach directory is ~/org/attach which isn't synced with phone
 ***** TODO view screenshots across devices (PC/Android Orgzly)
 **** TODO clock in/out smartly on state change
+*** Linking To Relevant Information During Capture Or Notes
+**** Linking to recent git commits
+***** TODO store all recent magit commits with org-store-link
+****** example
+I notice that =cw= is slower in my org files in doom emacs than in my vanilla
+config and note that down, I call =org-insert-link= and find the most recent
+commit to the relevant doom emacs config project.
 ** Agenda: What should you be doing now?
 The org agenda is quite a nice way to surface your notes into an actionable list
 of priorities and scheduled items. Though we need to do some work to [[id:a09cbdef-c018-45ff-af40-bdd78c0d7edd][Make Org
