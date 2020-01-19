@@ -161,6 +161,25 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
         '((sequence "TODO(t)" "STRT(s)" "IN-PROGRESS(i)" "NEXT(n)" "WAIT(w@/!)" "|" "DONE(d!)" "KILL(k@)")))
 #+end_src
 *** org agenda
+**** Use Org Super Agenda
+#+begin_src emacs-lisp :tangle yes
+(org-super-agenda-mode t)
+(after! org-agenda (setq org-agenda-custom-commands
+                         '(("t" "Tasks"
+                            ((agenda ""
+                                     (
+                                      (org-agenda-overriding-header "What's on my calendar")
+                                      (org-agenda-span 'day)
+                                      (org-agenda-start-day (org-today))
+                                      (org-agenda-current-span 'day)
+                                      (org-super-agenda-groups
+                                       '((:name "Today's Schedule"
+                                                :time-grid t
+                                                :scheduled t
+                                                :deadline t
+                                                :order 13)
+                                         )))))))))
+#+end_src
 **** Make Org Agenda look nicer
 :PROPERTIES:
 :ID:       a09cbdef-c018-45ff-af40-bdd78c0d7edd

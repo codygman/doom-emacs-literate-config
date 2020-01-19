@@ -48,3 +48,5 @@
 
 ;; ui/indent-guides
 (package! highlight-indent-guides)
+
+(package! org-super-agenda)
