@@ -15,7 +15,7 @@ the relevant hierarchical [[id:bc892078-e21e-4f4e-885c-44c0ade78420][Configurati
 with the mixed approach since [[https://github.com/alhassy/emacs.d/blob/master/README.org#a-life-configuring-emacs][that style can be very nice]].
 * Managing Life With Org Mode
 ** Capturing
-*** Ideas/Notes
+*** Ideas
 :PROPERTIES:
 :ID:       783fc72a-92d9-4ee1-9d58-9e77486cc544
 :END:
@@ -42,6 +42,19 @@ Example: Stop configuring org for hours on end and clock in to "Go get dinner" :
 <<default-capture-properties>>
 " :prepend t :clock-in t :clock-resume t)
 #+end_src
+*** Notes in existing projects
+Just now I needed to capture the note:
+
+"I like doom over my vanilla config because of the reload infrastructure and
+benchmarking/timing information that is prevalent"
+
+I wanted to be able to just capture it, but instead had to navigate to
+=projects.org=, go to =Active Projects=, go to =try out doom emacs for possible
+time savings=, find =notes on doom use through the week=.
+
+Instead I'd like an =Note In Active Project= capture template where I could just
+=SPC X a= (or using ivy to select that capture template text), type my note, and
+then refile into any realistic level within =Projects.org -> Active Projects=
 *** Projects
 Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas/Notes]] I quickly captured
 
@@ -135,7 +148,7 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+begin_src emacs-lisp :tangle yes :noweb yes
 (setq org-capture-templates
       '(
-        <<simple-todo-capture-template>>
+<<simple-todo-capture-template>>
 <<project-capture-template>>
 <<simple-todo-clocking-capture-template>>
         ))
@@ -181,7 +194,9 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
                                                 :scheduled t
                                                 :deadline t
                                                 :order 13)
-                                         )))))))))
+                                         ))))
+
+                            )))))
 #+end_src
 **** Make Org Agenda look nicer
 :PROPERTIES:
