@@ -46,6 +46,8 @@
 (package! anzu)
 (package! evil-anzu)
 
+(package! om :recipe (:repo "https://github.com/ndwarshuis/om.el.git"))
+
 ;; ui/indent-guides
 (package! highlight-indent-guides)
 
