@@ -178,25 +178,41 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+begin_src emacs-lisp :tangle yes
 (org-super-agenda-mode t)
 (after! org-agenda (setq org-agenda-custom-commands
-                         '(("t" "Tasks"
-                            ((todo "" ((org-agenda-files '("~/bsab/habits.org"))
-                                       (org-agenda-overriding-header "All Habits")
-                                       ))
+                         '(("d" "Dashboard"
+                            (
                              (agenda ""
-                                     (
-                                      (org-agenda-overriding-header "What's on my calendar")
-                                      (org-agenda-span 'day)
-                                      (org-agenda-start-day (org-today))
-                                      (org-agenda-current-span 'day)
-                                      (org-super-agenda-groups
-                                       '((:name "Today's Schedule"
-                                                :time-grid t
-                                                :scheduled t
-                                                :deadline t
-                                                :order 13)
-                                         ))))
+                              (
+                               (org-agenda-overriding-header "Dashboard")
+                               (org-agenda-span 'day)
+                               (org-agenda-start-day (org-today))
+                               (org-agenda-current-span 'day)
+                               (org-super-agenda-groups
+                                '(
+                                  (:habit t :order 2)
+                                  (:name "Schedule" :time-grid t :order 3)
+                                  (:name "Scheduled Earlier"
+                                         :scheduled past
+                                         :order 10
+                                         )
+                                  (:name "Must Do Today"
+                                         :and (:deadline today :priority "A")
+                                         :deadline today
+                                         :and (:deadline past :priority "A")
+                                         :and (:scheduled t :priority "A")
+                                         :and (:scheduled past :priority "A")
+                                         :deadline past
+                                         :order 1
+                                         )
+                                  (:name "Daily 10m Review"
+                                         :regexp "daily 10m review"
+                                         :and (:habit t :regexp "daily 10m review")
+                                         :order 0
+                                         )
+                                  (:log t)
 
-                            )))))
+                                  ))))
+
+                             )))))
 #+end_src
 **** Make Org Agenda look nicer
 :PROPERTIES:
