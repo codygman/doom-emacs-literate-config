@@ -176,6 +176,7 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 *** org agenda
 **** Use Org Super Agenda
 #+begin_src emacs-lisp :tangle yes
+(setq org-super-agenda-header-map (make-sparse-keymap)) ;; don't break evil on org-super-agenda headings, see https://github.com/alphapapa/org-super-agenda/issues/50
 (org-super-agenda-mode t)
 (after! org-agenda (setq org-agenda-custom-commands
                          '(("d" "Dashboard"
