@@ -214,16 +214,19 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
                                          :deadline past
                                          :order 1
                                          )
+
+                                  ;; dialy10m review not matching :/
                                   (:name "Daily 10m Review"
-                                         :regexp "daily 10m review"
-                                         :and (:habit t :regexp "daily 10m review")
+                                         :and (:habit t :regexp  "review")
                                          :order 0
                                          )
-                                  (:log t)
+                                  (:log t :order 20)
 
                                   ))))
 
-                             )))))
+                             ))))
+
+  )
 #+end_src
 **** Make Org Agenda look nicer
 :PROPERTIES:
