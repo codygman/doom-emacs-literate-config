@@ -32,6 +32,16 @@ simple capture template:
 I find it's a good idea to prepend these tasks by default so your freshest ideas
 are near the top of the file. Perhaps that's a bad habit or reinforces not
 curating or refiling things enough though.
+*** Load Personal Or Work Capture Templates And Agendas
+#+begin_src emacs-lisp :tangle yes
+;; TODO hardcode hack
+(setenv "EMACSFOR" "PERSONAL")
+(when (string-equal nil (getenv "TRAVIS_OS_NAME"))
+    (pcase (getenv "EMACSFOR")
+      ("WORK" (load (expand-file-name "work.el" "~")))
+      ("PERSONAL" (load (expand-file-name "bsab/personal.el" "~")))
+      (_ (error "Please set the EMACSFOR variable to WORK or PERSONAL"))))
+#+end_src
 *** Oh Crap I Need To Drop Everything And Do X
 
 Example: Stop configuring org for hours on end and clock in to "Go get dinner" :)
