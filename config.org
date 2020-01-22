@@ -81,7 +81,6 @@ Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas
          :PROPERTIES:
          :Effort:       00:01
          :END:
-,** TODO plan project :plan:
 ,** TODO project good/bad recap
 #+end_src
 *** Additions To Default Capture
