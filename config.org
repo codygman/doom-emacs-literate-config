@@ -73,7 +73,6 @@ Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas
  (file "capture-templates/project-capture-template.org") :prepend t)
 #+end_src
 
-#+name: test
 #+begin_src org :tangle ~/bsab/capture-templates/project-capture-template.org :mkdirp yes :noweb yes
 ,* TODO %? [/]
   <<default-capture-properties>>
