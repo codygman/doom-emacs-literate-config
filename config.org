@@ -113,7 +113,9 @@ Agenda look nicer]], it's well worth the effort.
 ** Archiving
 For a long time, I didn't even archive things out of fear I couldn't search
 them. That changes today, and I'll do it by archiving into an
-=archives/filename.org= for each org file.
+=archives/datetree.org=.
+
+That frees me up to archive daily!
 
 #+begin_src emacs-lisp :tangle yes
 (setq org-archive-location "~/bsab/archives/datetree.org::datetree/* Finished Tasks")
