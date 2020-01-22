@@ -110,6 +110,21 @@ Agenda look nicer]], it's well worth the effort.
 ** Viewing Org Files (prefer using agenda if possible)
 *** Additions To Default Org Mode View
 **** TODO hide properties by default
+** Archiving
+For a long time, I didn't even archive things out of fear I couldn't search
+them. That changes today, and I'll do it by archiving into an
+=archives/filename.org= for each org file.
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-archive-location "~/bsab/archives/datetree.org::datetree/* Finished Tasks")
+#+end_src
+
+While we're at it, let's make sure =org-search-view= includes all of our
+archives by using the magic =agenda-archives= symbol:
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-agenda-text-search-extra-files (list 'agenda-archives))
+#+end_src
 ** Resources
 *** https://github.com/alhassy/emacs.d/blob/master/README.org
 * Configuration
