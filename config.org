@@ -127,6 +127,14 @@ archives by using the magic =agenda-archives= symbol:
 #+begin_src emacs-lisp :tangle yes
 (setq org-agenda-text-search-extra-files (list 'agenda-archives))
 #+end_src
+** Clocking
+I like to clock things sometimes to get an idea where my day went. Clocks in
+doom seem to not be in the property drawer by default, so let's fix that:
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-log-into-drawer t
+      org-log-state-notes-into-drawer t)
+#+end_src
 ** Resources
 *** https://github.com/alhassy/emacs.d/blob/master/README.org
 * Configuration
