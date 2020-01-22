@@ -224,7 +224,7 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
                                (org-agenda-current-span 'day)
                                (org-super-agenda-groups
                                 '(
-                                  (:habit t :order 2)
+                                  (:and (:scheduled today :habit t) :order 2  :name "Habits Today")
                                   (:name "Schedule" :time-grid t :order 3)
                                   (:name "Scheduled Earlier"
                                          :scheduled past
