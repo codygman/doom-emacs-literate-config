@@ -103,6 +103,26 @@ NOTE: Default doom attach directory is ~/org/attach which isn't synced with phon
 I notice that =cw= is slower in my org files in doom emacs than in my vanilla
 config and note that down, I call =org-insert-link= and find the most recent
 commit to the relevant doom emacs config project.
+*** TODO Quick screenshot ability is absolutely necessary
+TODO: Doom doesn't seem to make =org-download-screenshot= available to us by default.
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-download-screenshot-method
+              (case system-type (gnu/linux "import %s") (darwin "screencapture -i %s")))
+#+end_src
+
+For some reason doom makes these "attach://" protocol links by default which don't
+seem to display in org mode. Let's change it back to "file://" so images show inline:
+
+Now that we have images inline though, some are *way* too large, let's default
+them to be 500 px wide:
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-download-image-org-width 400)
+#+end_src
+
+I would set =org-download-image-dir= but it seems doom is already automatically
+putting them in ~/.attach which is fine for me.
 ** Agenda: What should you be doing now?
 The org agenda is quite a nice way to surface your notes into an actionable list
 of priorities and scheduled items. Though we need to do some work to [[id:a09cbdef-c018-45ff-af40-bdd78c0d7edd][Make Org
