@@ -14,6 +14,17 @@ Perhaps it's always appropriate  to have a workflow description and then link to
 the relevant hierarchical [[id:bc892078-e21e-4f4e-885c-44c0ade78420][Configuration]] tree section, but for now I'm going
 with the mixed approach since [[https://github.com/alhassy/emacs.d/blob/master/README.org#a-life-configuring-emacs][that style can be very nice]].
 * Managing Life With Org Mode
+** Keep org files updated and avoid sync conficts
+Doom doesn't turn on auto-revert mode by default, meaning a change made on my
+phone that gets synced to my computer won't appear until I manually revert the
+buffer with =revert-buffer=.
+
+I backup my org files every 30 minutes and conflicts are a bigger pain, so let's
+do that automatically:
+
+#+begin_src emacs-lisp :tangle yes
+(global-auto-revert-mode t)
+#+end_src
 ** Capturing
 *** Ideas
 :PROPERTIES:
@@ -81,6 +92,55 @@ Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas
          :Effort:       00:01
          :END:
 ,** TODO project good/bad recap
+#+end_src
+*** Errands
+:PROPERTIES:
+:ID:       b0892384-d742-4f66-a7eb-013ab39fb3e2
+:END:
+Let's use org for random errands too:
+
+#+begin_src emacs-lisp :noweb-ref project-capture-template :tangle no :noweb yes
+("e" "Errand" entry (file+headline "~/amicody/errands.org" "Errands")
+         "* TODO %?" :prepend t)
+#+end_src
+*** Groceries
+:PROPERTIES:
+:ID:       4fd1e906-91c0-42f4-9d0b-367ee13d2814
+:END:
+I use org to manage my grocery list as well:
+
+#+begin_src emacs-lisp :noweb-ref grocery-capture-template :tangle no :noweb yes
+("g" "Grocery Item" entry (file+headline "~/amicody/grocery.org" "Groceries")
+         "* TODO %?" :prepend t)
+#+end_src
+*** Dinner
+:PROPERTIES:
+:ID:       a80d9edf-dabd-4dde-b267-ae743a0e4d00
+:END:
+"What did we have last Wednesday for dinner?" - Me or my girlfriend probably
+
+"What do we usually watch Sundays recently?" - Me
+
+We can use a reverse datetree capture template to answer those questions. This
+depends on [[https://github.com/akirak/org-reverse-datetree][org-reverse-datetree]] whose example uses their [[https://github.com/akirak/org-starter#installation][org-starter]] package, so
+we'll just install both in packages.
+
+FIXME: Can we install packages in config.org too?
+
+Here is our capture template:
+
+#+begin_src emacs-lisp :noweb-ref org-starter-dinner-capture-template-unused :tangle no :noweb yes
+(org-starter-def-capture "d"
+  "Dinner Eat/Watch History"
+  entry
+  (file+function "~/amicody/dinner.org" org-reverse-datetree-goto-date-in-file)
+  "* %?"
+  :clock-in t :clock-resume t :empty-lines 1)
+#+end_src
+
+#+begin_src emacs-lisp :noweb-ref dinner-history-capture-template :tangle no :noweb yes
+("d" "Dinner Eat/Watch History" entry (file+function "~/amicody/dinner.org" org-reverse-datetree-goto-date-in-file)
+         "* %?")
 #+end_src
 *** Additions To Default Capture
 **** TODO Screenshots: Quickly record information
@@ -189,6 +249,9 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 #+end_src
 ** Org Mode
 *** start after org macro
+:PROPERTIES:
+:ID:       0c10ce60-0d6a-4317-9469-cf7f45651a84
+:END:
 #+begin_src emacs-lisp :tangle yes
 (after! org
 #+end_src
@@ -198,12 +261,17 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 (setq org-id-link-to-org-use-id t)
 #+end_src
 *** org capture templates
+:PROPERTIES:
+:ID:       95e44ec7-c44b-4444-8b92-754330024e3e
+:END:
 #+begin_src emacs-lisp :tangle yes :noweb yes
 (setq org-capture-templates
       '(
 <<simple-todo-capture-template>>
 <<project-capture-template>>
 <<simple-todo-clocking-capture-template>>
+<<grocery-capture-template>>
+<<dinner-history-capture-template>>
         ))
 #+end_src
 *** default org capture heading properties
