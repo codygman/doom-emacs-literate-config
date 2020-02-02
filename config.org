@@ -285,8 +285,8 @@ Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 *** basics
 **** Here is where my org files live
 #+begin_src emacs-lisp
-(setq org-directory "~/bsab")
-(setq org-agenda-files '("~/bsab"))
+(setq org-directory "~/gtd")
+(setq org-agenda-files '("~/gtd" "~/amicody"))
 #+end_src
 **** These are my todo states
 #+name: set-org-todo-keywords
