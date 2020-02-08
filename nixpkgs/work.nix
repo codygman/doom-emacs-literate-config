@@ -4,13 +4,11 @@ with lib;
 {
   programs =
     {
-      pidgin.enable = true;
-      obs-studio.enable = true;
+      mercurial.enable = true;
     };
   home = {
-    packages = [ steam ];
+    packages = [ teams ];
   };
   services = {
-    spotifyd.enable = true;
   };
 }
