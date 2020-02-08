@@ -4,8 +4,10 @@ with lib;
 {
   programs = {
     home-manager.enable = true;
-    emacs.enable = true;
-    git.enable = true;
+    git = {
+      enable = true;
+      userName = "Cody Goodman";
+    };
   };
   home = {
     packages = with pkgs; [

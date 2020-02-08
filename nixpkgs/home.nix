@@ -4,20 +4,34 @@ with lib;
 let
   core = import ./core.nix { config = config; pkgs=pkgs; home=home; };
   personal = import ./personal.nix { config = config; pkgs=pkgs; home=home; };
+  work = import ./work.nix { config = config; pkgs=pkgs; home=home; };
+  empty = {
+    programs = {};
+    home = {packages = [];};
+    services = {};
+  };
+  currentEnv = if builtins.getEnv "MYENV" == "HOME"
+               then
+                 lib.info "loading HOME.nix home manager environment" personal
+               else
+                 lib.warn "MYENV not specified, ONLY core home environment will be available!" empty;
 in
 {
-  home = {
-    packages = lib.mkMerge [
-      core.home.packages
-      personal.home.packages
-    ];
-  };
+  imports = if builtins.getEnv "MYENV" == "HOME"
+               then
+                 lib.info "loading HOME.nix home manager environment"
+                   [ ./personal.nix ]
+               else
+                 lib.warn "MYENV not specified, ONLY core home environment will be available!"
+                   [ ./core.nix ];
+
+  home = lib.mkMerge [ core.home currentEnv.home ];
   programs = lib.mkMerge [
     core.programs
-    personal.programs
+    currentEnv.programs
   ];
   services = lib.mkMerge [
     core.services
-    personal.services
+    currentEnv.services
   ];
 }

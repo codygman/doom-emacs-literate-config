@@ -2,9 +2,14 @@
 with import <nixpkgs> {};
 with lib;
 {
+  imports = [
+    ./core.nix
+  ];
   programs =
     {
-      mercurial.enable = true;
+      git = {
+        userEmail = "cody@workEmail.com";
+      };
     };
   home = {
     packages = [ teams ];
