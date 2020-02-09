@@ -3,6 +3,7 @@ with import <nixpkgs> {};
 with lib;
 let
   myEnv = builtins.getEnv "MYENV";
+  emacsHEAD = import ./emacs.nix;
 in
 {
   imports = if myEnv != ""
@@ -20,7 +21,10 @@ in
   nixpkgs.config.allowUnfree = true;
   programs = {
     home-manager.enable = true;
-    emacs.enable = true;
+    emacs = {
+      enable = true;
+      package = emacsHEAD;
+    };
     git = {
       enable = true;
       userName = "Cody Goodman";
