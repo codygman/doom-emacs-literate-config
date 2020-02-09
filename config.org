@@ -1,3 +1,6 @@
+:PROPERTIES:
+:ID:       a3ba500f-c6c9-4173-8db9-8ad715f79405
+:END:
 #+TITLE: My emacs doom configuration
 #+AUTHOR: Cody Goodman
 #+EMAIL: cody@codygman.dev
@@ -34,7 +37,7 @@ Any idea or note that comes to me throughout the day can be captured with a
 simple capture template:
 
 #+begin_src emacs-lisp :noweb-ref simple-todo-capture-template :tangle no :noweb yes
-("t" "Todo (no clock in)" entry (file+headline "~/bsab/misc.org" "Misc")
+("i" "Quick Inbox Todo" entry (file+headline "~/gtd/inbox.org" "Inbox")
              "* TODO %?
 <<default-capture-properties>>
 " :prepend t)
@@ -58,6 +61,7 @@ curating or refiling things enough though.
 Example: Stop configuring org for hours on end and clock in to "Go get dinner" :)
 
 #+begin_src emacs-lisp :noweb-ref simple-todo-clocking-capture-template :tangle no :noweb yes
+;; TODO don't use for GTD?
 ("T" "Todo" entry (file+headline "~/bsab/misc.org" "Misc")
              "* TODO %?
 <<default-capture-properties>>
@@ -80,7 +84,7 @@ then refile into any realistic level within =Projects.org -> Active Projects=
 Projects may be created by from [[id:783fc72a-92d9-4ee1-9d58-9e77486cc544][Ideas/Notes]] I quickly captured
 
 #+begin_src emacs-lisp :noweb-ref project-capture-template :tangle no :noweb yes
-("p" "Project" entry (file+headline "~/bsab/projects.org" "Projects")
+("p" "Project" entry (file+headline "~/org/projects.org" "Projects")
  (file "capture-templates/project-capture-template.org") :prepend t)
 #+end_src
 
@@ -181,6 +185,14 @@ them to be 500 px wide:
 
 I would set =org-download-image-dir= but it seems doom is already automatically
 putting them in ~/.attach which is fine for me.
+*** linking or archiving webpages on the internet with org-web-tools
+
+This is actually done in [[file:packages.el::(package! org-web-tools)][packages.el]] for now, but for posterity it looks like:
+
+#+begin_src emacs-lisp :tangle no
+(package! org-web-tools)
+#+end_src
+
 ** Agenda: What should you be doing now?
 The org agenda is quite a nice way to surface your notes into an actionable list
 of priorities and scheduled items. Though we need to do some work to [[id:a09cbdef-c018-45ff-af40-bdd78c0d7edd][Make Org
@@ -231,6 +243,12 @@ doom seem to not be in the property drawer by default, so let's fix that:
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq user-mail-address "cody@codygman.dev")
 #+END_SRC
+** Spell checking
+foooobbbbbb
+*** load my personal dictionary
+#+begin_src emacs-lisp :tangle yes
+(setq ispell-personal-dictionary "~/gtd/files/ispell/personal/ispell_english")
+#+end_src
 ** Doom Core
 Here I setup my config for the =doom-emacs= [[doom:core/][core]]
 *** [[doom:core/core.el][Core]]
@@ -351,4 +369,10 @@ It just takes up valuable space and doesn't have a use
 *** end after org macro
 #+begin_src emacs-lisp
 )
+#+end_src
+
+*** dired
+**** make sorting easy (see https://gitlab.com/xuhdev/dired-quick-sort)
+#+begin_src emacs-lisp :tangle yes
+(after! dired (dired-quick-sort-setup)) ;; don't think this works
 #+end_src

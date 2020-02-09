@@ -55,3 +55,4 @@
 (package! dired-quick-sort) ;; :recipe (:host gitlab :repo "xuhdev/dired-quick-sort"))
 (package! org-starter)
 (package! org-reverse-datetree)
+(package! org-web-tools)
