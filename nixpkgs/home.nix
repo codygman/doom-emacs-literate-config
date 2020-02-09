@@ -2,36 +2,42 @@
 with import <nixpkgs> {};
 with lib;
 let
-  core = import ./core.nix { config = config; pkgs=pkgs; home=home; };
-  personal = import ./personal.nix { config = config; pkgs=pkgs; home=home; };
-  work = import ./work.nix { config = config; pkgs=pkgs; home=home; };
-  empty = {
-    programs = {};
-    home = {packages = [];};
-    services = {};
-  };
-  currentEnv = if builtins.getEnv "MYENV" == "HOME"
-               then
-                 lib.info "loading HOME.nix home manager environment" personal
-               else
-                 lib.warn "MYENV not specified, ONLY core home environment will be available!" empty;
+  myEnv = builtins.getEnv "MYENV";
 in
 {
-  imports = if builtins.getEnv "MYENV" == "HOME"
-               then
-                 lib.info "loading HOME.nix home manager environment"
+  imports = if myEnv != ""
+               then if myEnv == "personal" then
+                 lib.info "loading PERSONAL home manager environment"
                    [ ./personal.nix ]
+                    else
+                      if myEnv == "work" then
+                        lib.info "loading WORK home manager environment"
+                          [ ./work.nix ]
+                      else
+                        lib.warn "MYENV is not one of 'personal' or 'work', ONLY core home environment will be available!" []
                else
-                 lib.warn "MYENV not specified, ONLY core home environment will be available!"
-                   [ ./core.nix ];
+                 lib.warn "MYENV not specified, ONLY core home environment will be available!" [];
+  nixpkgs.config.allowUnfree = true;
+  programs = {
+    home-manager.enable = true;
+    emacs.enable = true;
+    git = {
+      enable = true;
+      userName = "Cody Goodman";
+    };
+  };
 
-  home = lib.mkMerge [ core.home currentEnv.home ];
-  programs = lib.mkMerge [
-    core.programs
-    currentEnv.programs
-  ];
-  services = lib.mkMerge [
-    core.services
-    currentEnv.services
-  ];
+  home = {
+    packages = with pkgs; [
+      ripgrep
+      source-code-pro
+    ];
+  };
+
+  services = {
+    redshift = {
+      enable = true;
+      provider = "geoclue2";
+    };
+  };
 }

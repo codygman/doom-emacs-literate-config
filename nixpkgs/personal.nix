@@ -3,9 +3,6 @@ with import <nixpkgs> {};
 with lib;
 
 {
-  imports = [
-    ./core.nix
-  ];
   programs =
     {
       pidgin.enable = true;
@@ -16,7 +13,7 @@ with lib;
       astroid.enable = true;
     };
   home = {
-    packages = [ steam pong3d ];
+    packages = [ pong3d ];
     file = {
       ".bashrc" = {
         text = ''

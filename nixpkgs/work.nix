@@ -2,9 +2,6 @@
 with import <nixpkgs> {};
 with lib;
 {
-  imports = [
-    ./core.nix
-  ];
   programs =
     {
       git = {
