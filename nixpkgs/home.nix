@@ -34,7 +34,11 @@ in
   home = {
     packages = with pkgs; [
       ripgrep
+      fd
+
       source-code-pro
+
+      psensor
     ];
   };
 
