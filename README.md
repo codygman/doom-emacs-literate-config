@@ -13,6 +13,7 @@ My [doom-emacs](https://github.com/hlissner/doom-emacs) literate config
 ```bash
 git clone -b develop git://github.com/hlissner/doom-emacs ~/.emacs.d
 git clone git://github.com/codygman/doom-emacs-literate-config.git ~/.config/doom
+~/.config/doom/bootstrap.hs
 cd ~/.emacs.d
 make
 ```
