@@ -40,7 +40,7 @@ main = do
       -- symlink file (or copy on android, then rename home.nix to nix-on-droid.nix)
       hostname >>= \hn -> case hn of
                             "localhost" -> do
-                                           echo "renamed home.nix to nix-on-droid.nix"
+                                           echo "android detected, using copying instead of symlinks"
                                            cp doomDirNixpkgs nixpkgConfigPath
                                            mv (nixpkgConfigPath </> decodeString "home.nix") (nixpkgConfigPath </> decodeString "nix-on-droid.nix")
                                            echo "renamed home.nix to nix-on-droid.nix"
