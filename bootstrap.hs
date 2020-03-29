@@ -56,8 +56,12 @@ main = do
     , "home-manager"
     ]
     empty
-  view $ inproc "nix-channel" ["--update"] empty
-  view $ inshell "nix-shell '<home-manager>' -A install" empty
+  which "home-manager" >>= \hm -> case hm of
+    Just _  -> view $ inshell "home-manager switch" empty
+    Nothing -> do
+      -- WIP get rid of leading "Shell: " part of text values
+      proc "nix-channel" ["--update"] empty
+      view $ inshell "nix-shell '<home-manager>' -A install" empty
 
 echoTxt :: Text -> IO ()
 echoTxt = echo . unsafeTextToLine
