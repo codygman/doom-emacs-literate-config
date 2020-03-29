@@ -28,6 +28,7 @@ in
     git = {
       enable = true;
       userName = "Cody Goodman";
+      userEmail = "cody@codygman.dev";
     };
   };
 
