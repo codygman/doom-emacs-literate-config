@@ -1,8 +1,10 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i runghc -p "haskellPackages.ghcWithPackages (ps: [ps.turtle])"
-#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/ae6bdcc53584aaf20211ce1814bea97ece08a248.tar.gz
+#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/d5291756487d70bc336e33512a9baf9fa1788faf.tar.gz
 {-# LANGUAGE OverloadedStrings #-}
--- NOTE: nixpkgs is pinned to nixos-unstable 2020-03-28
+-- NOTE: nixpkgs is pinned to nixpkgs-1909 2020-03-28
+-- it's 1909 mostly so that I don't have to build ghc on android
+-- which kept failing for some reason with previous pin
 import           Turtle
 import           Data.Time
 import           Control.Monad
