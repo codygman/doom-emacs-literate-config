@@ -4,6 +4,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- NOTE: nixpkgs is pinned to nixos-unstable 2020-03-28
 import Turtle
+import Data.Time
 import Control.Monad
 
 
@@ -19,17 +20,32 @@ home-manager switch
 -- echoTxt =  echo . unsafeTextToLine
 main :: IO ()
 main = do
-    -- guard True $ pure 1
     userHome <- home
     doomDir <- pwd
     let doomDirNixpkgs = doomDir </> decodeString "nixpkgs"
     let nixpkgConfigPath = userHome </> decodeString ".config/nixpkgs"
+    let bootstrapBackups = userHome </> decodeString ".bootstrap-backups"
     testdir nixpkgConfigPath >>= \there -> do
-      if there then do
-        echo "WARNING: ~/.config/nixpkgs symlink already exists, using current nix files"
-      else do
-        echoTxt $ format ("Symlinked "%fp%" to "%fp) doomDirNixpkgs nixpkgConfigPath 
-        symlink doomDirNixpkgs nixpkgConfigPath
+      echoTxt $ format ("NOTE: moving current config to " % fp) bootstrapBackups
+      -- create backup directory
+      mktree bootstrapBackups
+      -- move old folder with timestamp into backup directory
+      date >>= \now -> let timestamp = (fromString $formatTime defaultTimeLocale (iso8601DateFormat $ Just "%H_%M_%S") now ) :: Text
+                           nixpkgsPrefix = ("nixpkgs_" :: Text)
+                           backupPath = bootstrapBackups </> fromText (format (s % s) nixpkgsPrefix timestamp)
+                         in do
+                            -- TODO don't want to do this every time unless there's a change
+                            echoTxt $ format ("moving '" %fp% "' to '" %fp% "'") nixpkgConfigPath backupPath
+                            mv nixpkgConfigPath backupPath
+      -- symlink file (or copy on android, then rename home.nix to nix-on-droid.nix)
+      hostname >>= \hn -> case hn of
+                            "localhost" -> do
+                                           echo "renamed home.nix to nix-on-droid.nix"
+                                           cp doomDirNixpkgs nixpkgConfigPath
+                                           mv (nixpkgConfigPath </> decodeString "home.nix") (nixpkgConfigPath </> decodeString "nix-on-droid.nix")
+                                           echo "renamed home.nix to nix-on-droid.nix"
+                            "nixos" -> symlink doomDirNixpkgs nixpkgConfigPath
+                            unknown -> error $ "unkown system, not sure what to do: " <> show unknown
     dirsExist <- sequenceA [ testdir doomDirNixpkgs
                            , testdir nixpkgConfigPath
                            ]
