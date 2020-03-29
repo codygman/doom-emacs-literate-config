@@ -49,7 +49,7 @@ main = do
       unknown -> error $ "unkown system, not sure what to do: " <> show unknown
   dirsExist <- sequenceA [testdir doomDirNixpkgs, testdir nixpkgConfigPath]
   if all (== True) dirsExist then pure () else exit (ExitFailure 1)
-  view $ inproc
+  view $ proc
     "nix-channel"
     [ "--add"
     , "https://github.com/rycee/home-manager/archive/master.tar.gz"
@@ -57,11 +57,11 @@ main = do
     ]
     empty
   which "home-manager" >>= \hm -> case hm of
-    Just _  -> view $ inshell "home-manager switch" empty
+    Just _  -> view $ shell "home-manager switch" empty
     Nothing -> do
       -- WIP get rid of leading "Shell: " part of text values
       proc "nix-channel" ["--update"] empty
-      view $ inshell "nix-shell '<home-manager>' -A install" empty
+      view $ shell "nix-shell '<home-manager>' -A install" empty
 
 echoTxt :: Text -> IO ()
 echoTxt = echo . unsafeTextToLine
